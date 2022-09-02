@@ -4,6 +4,26 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GumballMachineTest {
 
+
+    /**
+     * This method will test for initial balance
+     */
+    @Test
+    void testInitialBalance(){
+        assertEquals(0,GumballMachine.getUserBalance());
+    }
+
+    /**
+     * This method will test for return Change
+     */
+    @Test
+    void testReturnChange(){
+        //Test Case: User wants to return change and dispensing gumball
+        GumballMachine.userBalance= 10; //set user balance to 10
+        assertTrue(GumballMachine.refund()); // test for successful refund
+        assertEquals(10,GumballMachine.getUserBalance()); //check the refund balance
+    }
+
     /**
      * This method will test the method askUsersForMoney from GumballMachine
      */

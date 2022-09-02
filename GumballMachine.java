@@ -23,6 +23,15 @@ public class GumballMachine {
     static boolean wantChange = false;
     static boolean doneAddingMoney = false;
 
+    static double getUserBalance(){
+        return userBalance;
+    }
+
+    static boolean refund() {
+        System.out.println(getUserBalance() + " is your change");
+        return wantChange = true;
+    }
+
     /**
      * This method will take user input to determine how much money the user wants to insert into a gumball machine,
      * determines what color gumball they want and how many of each color
@@ -31,7 +40,7 @@ public class GumballMachine {
         //continues to prompt the user to add money until they are finished
         while (!doneAddingMoney) {
             //prompts user to add money
-            System.out.println("Balance: " + userBalance + " Do you want to enter a n, d or q? Say no if you are done");
+            System.out.println("Balance: " + getUserBalance() + " Do you want to enter a n, d or q? Say no if you are done");
             askUserForMoney(scan.nextLine());
         }
 
@@ -40,6 +49,7 @@ public class GumballMachine {
             //once the user runs out of money, they will be told so and how many of each color gumball they acquired
             if (userBalance == 0) {
                 System.out.println("You are out of money. You got " + numRed + " red gumballs and " + numYellow + " yellow gumballs");
+                break;
             }
             /*
             once the user still has money remaining, they will be told their current balance and number of each color gumball
@@ -47,7 +57,7 @@ public class GumballMachine {
             change back
             */
             else {
-                System.out.println("Current balance: " + userBalance + ". You have " + numRed + " red gumballs and " + numYellow + " yellow gumballs");
+                System.out.println("Current balance: " + getUserBalance() + ". You have " + numRed + " red gumballs and " + numYellow + " yellow gumballs");
                 System.out.println("Do you want a red or yellow gumball? Or Select 'Return My Change' if you are done");
                 askUserWhatGumballs(scan.nextLine());
             }
@@ -102,8 +112,7 @@ public class GumballMachine {
 
         //once the user requests their change back, they will receive their change and the program will end
         else if (input.equals("Return My Change")) {
-            System.out.println(userBalance + " is your change");
-            wantChange = true;
+            refund();
         } else if ((userBalance < redGumball && input.equals("red")) || (userBalance < yellowGumball && input.equals("yellow"))) {
             System.out.println("You do not have enough money");
         }
@@ -112,5 +121,7 @@ public class GumballMachine {
             System.out.println("Try again");
         }
     }
+
+
 }
 
