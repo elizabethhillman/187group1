@@ -59,6 +59,13 @@ class GumballMachineTest {
         GumballMachine.askUserForMoney("n");
         GumballMachine.askUserForMoney("n");
         assertEquals(10, GumballMachine.userBalance);
+        
+        //Test Case: User Inputs mix coins
+        //Reasoning: To make sure the user can input mix coins before pressing the lever
+        GumballMachine.userBalance = 0;
+        GumballMachine.askUserForMoney("d");
+        GumballMachine.askUserForMoney("q");
+        assertEquals(35, GumballMachine.userBalance);
     }
 
     /**
