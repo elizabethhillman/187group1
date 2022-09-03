@@ -113,4 +113,21 @@ class GumballMachineTest {
         GumballMachine.askUserWhatGumballs("Return My Change");
         assertTrue(GumballMachine.wantChange);
     }
+    
+    /**
+     * This method will test for multiple dispenses from the Gumball Machine
+     * check the correct amount of change returned 
+     */
+    @Test
+    void testMultipleDispense() {
+        //Test case: Dispense Multiple gumballs to get correct change
+        //Reasoning: To check if user can dispense multiple gumballs and get back correct change
+        GumballMachine.userBalance = 25;
+        GumballMachine.askUserWhatGumballs("yellow");
+        GumballMachine.askUserWhatGumballs("red");
+        GumballMachine.refund();
+        assertEquals(1, GumballMachine.numYellow);
+        assertEquals(1, GumballMachine.numRed);
+        assertEquals(10,GumballMachine.getUserBalance());
+    }
 }
