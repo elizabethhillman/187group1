@@ -118,7 +118,7 @@ public class GumballMachine {
         }
         //once there is any type of input error, the user will be prompted again for what color gumball they want
         else {
-            System.out.println("Try again");
+            System.out.println("Invalid input. Try again");
         }
     }
 
