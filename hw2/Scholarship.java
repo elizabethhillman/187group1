@@ -1,10 +1,11 @@
 package hw2;
 /*
   Authors: Elizabeth Hillman, Camellia Bazargan, Vy Nguyen, Jagjit Singh
-  Date: 9/22/22
+  Date: 10/01/22
   Assignment: Scholarship - Control Flow
-  Problem Statement: This program will determine if a student is eligible for a scholarship
-  based on age, where they live, their work history, taxes, volunteering history, and income
+  Problem Statement: Determine if a student is eligible for a scholarship or for dean consideration
+  based on their age, where they live, their work history, taxes, volunteering history, and income
+
  */
 
 import java.util.Scanner;
@@ -34,15 +35,15 @@ public class Scholarship {
         resident = charToBool(sc.next().charAt(0));
 
         //used to verify the users work history
-        System.out.println("have you worked part time");
+        System.out.println("have you worked part time or full time for at least 6 months");
         partTimeWorker = charToBool(sc.next().charAt(0));
 
         //used to verify the user's parents tax info
-        System.out.println("have your parents paid state tax");
+        System.out.println("have your parents paid CA state tax and lived in CA for 1 year");
         paidStateTax = charToBool(sc.next().charAt(0));
 
         //used to verify the users volunteering history
-        System.out.println("have you volunteered for a cause");
+        System.out.println("have you volunteered for a public cause in CA and have proof");
         volunteered = charToBool(sc.next().charAt(0));
 
         //used to very the users income
@@ -52,19 +53,13 @@ public class Scholarship {
         //this will pass the users information to checkEligibility() method to determine if the user is eligible for scholarship or not
         int eligible = checkEligibility(age, resident, partTimeWorker, paidStateTax, volunteered, houseHoldIncome);
 
-        //if the user does not have the correct input to be eligible for the scholarship, they will be told they are not
-        if (eligible == 0) {
-            System.out.println("not");
-
-        }
-        //if the user satisfy the requirements, then they will be told they are eligible
-        else if (eligible == 1) {
-            System.out.println("eligible");
-
-        }
-        //if the user satisfy most requirements but does in fact satisfy the requirement to be passed for dean consideration, then they will be told so
-        else {
+        //if the user doesn't meet CA residency but has income less than $5k they will be told they are up for dean consideration
+        if (eligible == -1) {
             System.out.println("Dean for consideration");
+        }
+        //will print 0 if they aren't eligible and 1 for eligible
+        else {
+            System.out.println(eligible);
         }
     }
 
@@ -81,35 +76,22 @@ public class Scholarship {
     public static int checkEligibility(int age, boolean isResident, boolean isPartTimeWorker, boolean hasPaidStateTax,
                                        boolean hasVolunteered, int houseHoldIncome)
     {
-        //if user age is within the accepted range then will return 0
+        //if user age is not within the accepted range then will return 0 (false)
         if (age < 18 || age > 24)
         {
             return 0;
         }
-        //if user hasn't been a resident of CA for 2 years and their parents haven't paid taxes, will return 0
-        if (!isResident) {
-            if (!hasPaidStateTax) {
-                return 0;
-            }
+        //if user has met at least one of the CA residency conditions they will be eligible
+        if (isResident || isPartTimeWorker || hasPaidStateTax || hasVolunteered) {
+            return 1;
         }
-        //if the user hasn't volunteered for a cause then will return 0
-        if (!hasVolunteered) {
-            return 0;
-        }
-        //if the user hasn't worked part-time (don't need to check for volunteer status as that is covered first) returns 0
-        if (!isPartTimeWorker) {
-            return 0;
-        }
-        //if the users parents haven't paid taxes return 0
-        if (!hasPaidStateTax) {
-            return 0;
-        }
+
         //if the users income is below the threshold then they will be sent for dean consideration
         if (houseHoldIncome < 5000) {
             return -1;
         }
-        //if the user satisfy the conditions, then they will be eligible
-        return 1;
+        //if the user doesn't satisfy CA residency conditions or income less than threshold they will not be eligible
+        return 0;
     }
 
     /**
