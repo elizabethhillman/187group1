@@ -22,15 +22,7 @@ public class Scholarship {
     /**
      * This method will call checkEligibility to determine the student's eligibility status
      */
-    public static void main(String[] args) {
-        checkEligibility();
-    }
-
-    /**
-     * this method will be used to determine the users eligibility for the scholarship based on their input
-     * prints 0 if they aren't eligible, 1 if they are or for dean for consideration
-     */
-    public static void checkEligibility()
+    public static void main(String[] args)
     {
         //scanner to get user info
         Scanner sc = new Scanner(System.in);
@@ -38,12 +30,6 @@ public class Scholarship {
         //used to get the users age
         System.out.println("Enter your age");
         age = sc.nextInt();
-        //if they do not meet age requirements, they will not be eligible and code will end
-        if (age < 18 || age > 24)
-        {
-            System.out.println("0");
-            System.exit(0);
-        }
 
         //used to verify the user has lived in CA for 2 years
         System.out.println("Have you lived in california for last 2 years: Y/N");
@@ -61,24 +47,38 @@ public class Scholarship {
         System.out.println("have you volunteered for a public cause in CA and have proof");
         volunteered = charToBool(sc.next().charAt(0));
 
-        //checks if the user meets at least one CA residency conditions
-        if (resident || partTimeWorker || paidStateTax || volunteered) {
-            System.out.println("1");
-            System.exit(0);
-        }
         //used to very the users income
         System.out.println("Enter your HouseHold Income");
         houseHoldIncome = sc.nextInt();
 
+        System.out.println(checkEligibility(age, resident, partTimeWorker, paidStateTax, volunteered, houseHoldIncome));
+    }
+
+    /**
+     * this method will be used to determine the users eligibility for the scholarship based on their input
+     * prints 0 if they aren't eligible, 1 if they are or for dean for consideration
+     */
+    public static int checkEligibility(int userAge, boolean isResident, boolean isWorker, boolean paidTaxes, boolean hasVolunteered, int income)
+    {
+
+        //if they do not meet age requirements, they will not be eligible and code will end
+        if (userAge < 18 || userAge > 24)
+        {
+            return 0;
+        }
+
+        //checks if the user meets at least one CA residency conditions
+        if (isResident || isWorker || paidTaxes || hasVolunteered) {
+            return 1;
+        }
+
         //if they do not meet residency conditions but meet requirements then they will be up for dean consideration
-        if (houseHoldIncome < 5000) {
+        if (income < 5000) {
             System.out.println("Dean for consideration");
+            return -1;
         }
         //if they don't meet residency conditions and also have too high of an income they will not be eligible
-        else
-        {
-            System.out.println("0");
-        }
+        return 0;
     }
 
     /**
