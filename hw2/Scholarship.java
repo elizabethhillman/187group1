@@ -73,13 +73,11 @@ public class Scholarship {
         //if they do not meet residency conditions but meet requirements then they will be up for dean consideration
         if (houseHoldIncome < 5000) {
             System.out.println("Dean for consideration");
-            System.exit(0);
         }
         //if they don't meet residency conditions and also have too high of an income they will not be eligible
         else
         {
             System.out.println("0");
-            System.exit(0);
         }
     }
 
