@@ -20,15 +20,30 @@ public class Scholarship {
     static int houseHoldIncome = 0;
 
     /**
-     * This method will take user input to then be used to determine their eligibility for the scholarship
+     * This method will call checkEligibility to determine the student's eligibility status
      */
     public static void main(String[] args) {
+        checkEligibility();
+    }
+
+    /**
+     * this method will be used to determine the users eligibility for the scholarship based on their input
+     * prints 0 if they aren't eligible, 1 if they are or for dean for consideration
+     */
+    public static void checkEligibility()
+    {
         //scanner to get user info
         Scanner sc = new Scanner(System.in);
 
         //used to get the users age
         System.out.println("Enter your age");
         age = sc.nextInt();
+        //if they do not meet age requirements, they will not be eligible and code will end
+        if (age < 18 || age > 24)
+        {
+            System.out.println("0");
+            System.exit(0);
+        }
 
         //used to verify the user has lived in CA for 2 years
         System.out.println("Have you lived in california for last 2 years: Y/N");
@@ -46,52 +61,26 @@ public class Scholarship {
         System.out.println("have you volunteered for a public cause in CA and have proof");
         volunteered = charToBool(sc.next().charAt(0));
 
+        //checks if the user meets at least one CA residency conditions
+        if (resident || partTimeWorker || paidStateTax || volunteered) {
+            System.out.println("1");
+            System.exit(0);
+        }
         //used to very the users income
         System.out.println("Enter your HouseHold Income");
         houseHoldIncome = sc.nextInt();
 
-        //this will pass the users information to checkEligibility() method to determine if the user is eligible for scholarship or not
-        int eligible = checkEligibility(age, resident, partTimeWorker, paidStateTax, volunteered, houseHoldIncome);
-
-        //if the user doesn't meet CA residency but has income less than $5k they will be told they are up for dean consideration
-        if (eligible == -1) {
-            System.out.println("Dean for consideration");
-        }
-        //will print 0 if they aren't eligible and 1 for eligible
-        else {
-            System.out.println(eligible);
-        }
-    }
-
-    /**
-     * this method will be used to determine the users eligibility for the scholarship based on their input
-     * @param age - user input
-     * @param isResident - user input
-     * @param isPartTimeWorker- user input
-     * @param hasPaidStateTax- user input
-     * @param hasVolunteered- user input
-     * @param houseHoldIncome- user input
-     * @return - 0 if they aren't eligible, 1 if they are and -1 for dean for consideration
-     */
-    public static int checkEligibility(int age, boolean isResident, boolean isPartTimeWorker, boolean hasPaidStateTax,
-                                       boolean hasVolunteered, int houseHoldIncome)
-    {
-        //if user age is not within the accepted range then will return 0 (false)
-        if (age < 18 || age > 24)
-        {
-            return 0;
-        }
-        //if user has met at least one of the CA residency conditions they will be eligible
-        if (isResident || isPartTimeWorker || hasPaidStateTax || hasVolunteered) {
-            return 1;
-        }
-
-        //if the users income is below the threshold then they will be sent for dean consideration
+        //if they do not meet residency conditions but meet requirements then they will be up for dean consideration
         if (houseHoldIncome < 5000) {
-            return -1;
+            System.out.println("Dean for consideration");
+            System.exit(0);
         }
-        //if the user doesn't satisfy CA residency conditions or income less than threshold they will not be eligible
-        return 0;
+        //if they don't meet residency conditions and also have too high of an income they will not be eligible
+        else
+        {
+            System.out.println("0");
+            System.exit(0);
+        }
     }
 
     /**
