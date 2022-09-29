@@ -1,3 +1,4 @@
+package hw1;
 /**
  * Authors: Elizabeth Hillman, Camellia Bazargan, Vy Nguyen, Jagjit Singh
  * Date: 8/30/22

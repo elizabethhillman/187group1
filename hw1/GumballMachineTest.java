@@ -1,3 +1,5 @@
+package hw1;
+
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -25,7 +27,7 @@ class GumballMachineTest {
     }
 
     /**
-     * This method will test the method askUsersForMoney from GumballMachine
+     * This method will test the method askUsersForMoney from hw1.GumballMachine
      */
     @Test
     void askUserForMoney() {
@@ -69,7 +71,7 @@ class GumballMachineTest {
     }
 
     /**
-     * This method will test the method askUserWhatGumballs from GumballMachine
+     * This method will test the method askUserWhatGumballs from hw1.GumballMachine
      */
     @Test
     void askUserWhatGumballs() {
