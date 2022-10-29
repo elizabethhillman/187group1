@@ -1,7 +1,7 @@
 package hw4;
 /*
   Authors: Elizabeth Hillman, Camellia Bazargan, Vy Nguyen, Jagjit Singh
-  Date: 10/30/22
+  Date: 10/29/22
   Assignment: GamesExpo - Domain Testing
   Problem Statement: Determine which of the six competition a child is eligible for, based on their age and gender.
  */
