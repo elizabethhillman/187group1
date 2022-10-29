@@ -89,4 +89,156 @@ class GamesExpoTest {
         GamesExpo.age = 17;
         assertTrue(GamesExpo.canNotParticipate(GamesExpo.age));
     }
+
+    @Test
+    void boundaryVAStoryTelling() {
+        GamesExpo.age = 6;
+        GamesExpo.gender = "boy";
+        assertFalse(GamesExpo.canParticipateInStorytelling(GamesExpo.age, GamesExpo.gender));
+
+        GamesExpo.age = 7;
+        GamesExpo.gender = "boy";
+        assertTrue(GamesExpo.canParticipateInStorytelling(GamesExpo.age, GamesExpo.gender));
+
+        GamesExpo.age = 11;
+        GamesExpo.gender = "boy";
+        assertFalse(GamesExpo.canParticipateInStorytelling(GamesExpo.age, GamesExpo.gender));
+
+        GamesExpo.age = 10;
+        GamesExpo.gender = "boy";
+        assertTrue(GamesExpo.canParticipateInStorytelling(GamesExpo.age, GamesExpo.gender));
+
+
+    }
+
+    @Test
+    void boundaryVADrawing() {
+        GamesExpo.age = 6;
+        GamesExpo.gender = "girl";
+        assertFalse(GamesExpo.canParticipateInDrawing(GamesExpo.age, GamesExpo.gender));
+
+        GamesExpo.age = 7;
+        GamesExpo.gender = "girl";
+        assertTrue(GamesExpo.canParticipateInDrawing(GamesExpo.age, GamesExpo.gender));
+
+        GamesExpo.age = 11;
+        GamesExpo.gender = "girl";
+        assertFalse(GamesExpo.canParticipateInDrawing(GamesExpo.age, GamesExpo.gender));
+
+        GamesExpo.age = 10;
+        GamesExpo.gender = "girl";
+        assertTrue(GamesExpo.canParticipateInDrawing(GamesExpo.age, GamesExpo.gender));
+
+    }
+
+    @Test
+    void boundaryVARhyming() {
+        GamesExpo.age = -1;
+        assertFalse(GamesExpo.canParticipateInRhyming(GamesExpo.age));
+
+        GamesExpo.age = 0;
+        assertTrue(GamesExpo.canParticipateInRhyming(GamesExpo.age));
+
+        GamesExpo.age = 7;
+        assertFalse(GamesExpo.canParticipateInRhyming(GamesExpo.age));
+
+        GamesExpo.age = 6;
+        assertTrue(GamesExpo.canParticipateInRhyming(GamesExpo.age));
+
+
+    }
+
+    @Test
+    void boundaryVAQuiz() {
+        GamesExpo.age = 10;
+        GamesExpo.gender = "boy";
+        assertFalse(GamesExpo.canParticipateInQuiz(GamesExpo.age, GamesExpo.gender));
+
+        GamesExpo.age = 11;
+        GamesExpo.gender = "boy";
+        assertTrue(GamesExpo.canParticipateInQuiz(GamesExpo.age, GamesExpo.gender));
+
+        GamesExpo.age = 16;
+        GamesExpo.gender = "boy";
+        assertFalse(GamesExpo.canParticipateInQuiz(GamesExpo.age, GamesExpo.gender));
+
+        GamesExpo.age = 15;
+        GamesExpo.gender = "boy";
+        assertTrue(GamesExpo.canParticipateInQuiz(GamesExpo.age, GamesExpo.gender));
+
+
+    }
+
+    @Test
+    void boundaryVAEssay() {
+        GamesExpo.age = 9;
+        GamesExpo.gender = "girl";
+        assertFalse(GamesExpo.canParticipateInEssayWriting(GamesExpo.age, GamesExpo.gender));
+
+        GamesExpo.age = 10;
+        GamesExpo.gender = "girl";
+        assertTrue(GamesExpo.canParticipateInEssayWriting(GamesExpo.age, GamesExpo.gender));
+
+        GamesExpo.age = 16;
+        GamesExpo.gender = "girl";
+        assertFalse(GamesExpo.canParticipateInEssayWriting(GamesExpo.age, GamesExpo.gender));
+
+        GamesExpo.age = 15;
+        GamesExpo.gender = "girl";
+        assertTrue(GamesExpo.canParticipateInEssayWriting(GamesExpo.age, GamesExpo.gender));
+    }
+
+    @Test
+    void boundaryVAPoetry() {
+        GamesExpo.age = 19;
+        assertFalse(GamesExpo.canParticipateInPoetry(GamesExpo.age));
+
+        GamesExpo.age = 20;
+        assertTrue(GamesExpo.canParticipateInPoetry(GamesExpo.age));
+
+        GamesExpo.age = 100;
+        assertTrue(GamesExpo.canParticipateInPoetry(GamesExpo.age));
+
+    }
+
+    @Test
+    void equivalencePartitionStoryTelling() {
+        GamesExpo.age = 8;
+        GamesExpo.gender = "boy";
+        assertTrue(GamesExpo.canParticipateInStorytelling(GamesExpo.age, GamesExpo.gender));
+    }
+
+    @Test
+    void equivalencePartitionDrawing() {
+        GamesExpo.age = 8;
+        GamesExpo.gender = "girl";
+        assertTrue(GamesExpo.canParticipateInDrawing(GamesExpo.age, GamesExpo.gender));
+    }
+
+    @Test
+    void equivalencePartitionRhyming() {
+        GamesExpo.age = 4;
+        assertTrue(GamesExpo.canParticipateInRhyming(GamesExpo.age));
+    }
+
+    @Test
+    void equivalencePartitionQuiz() {
+        GamesExpo.age = 13;
+        GamesExpo.gender = "boy";
+        assertTrue(GamesExpo.canParticipateInQuiz(GamesExpo.age, GamesExpo.gender));
+    }
+
+    @Test
+    void equivalencePartitionEssay() {
+        GamesExpo.age = 13;
+        GamesExpo.gender = "girl";
+        assertTrue(GamesExpo.canParticipateInEssayWriting(GamesExpo.age, GamesExpo.gender));
+    }
+
+    @Test
+    void equivalencePartitionPoetry() {
+        GamesExpo.age = 40;
+        assertTrue(GamesExpo.canParticipateInPoetry(GamesExpo.age));
+    }
+
 }
